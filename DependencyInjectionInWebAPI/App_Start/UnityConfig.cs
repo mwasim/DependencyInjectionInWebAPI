@@ -1,3 +1,5 @@
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using DependencyInjectionInWebAPI.Entities;
@@ -17,6 +19,7 @@ namespace DependencyInjectionInWebAPI
             // e.g. container.RegisterType<ITestService, TestService>();
 
             container.RegisterType<ICountryRepository, CountryRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<DbContext, CountriesDbEntities>(new HierarchicalLifetimeManager());
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

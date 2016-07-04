@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +11,12 @@ namespace DependencyInjectionInWebAPI.Entities
 {
     public class CountryRepository : IDisposable, ICountryRepository
     {
-        private CountriesDbEntities _db = new CountriesDbEntities();
+        private CountriesDbEntities _db;
+
+        public CountryRepository(CountriesDbEntities db)
+        {
+            _db = db;
+        }
 
         public IEnumerable<Country> GetAll()
         {
